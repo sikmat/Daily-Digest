@@ -36,7 +36,7 @@ def get_weather_forecast():
     while running:
         while True:
             try:
-                search = (input('Please input city: '))
+                search = 'Cape Town' #(input('Please input city: '))
             except ValueError:
                 print("Sorry, I didn't understand that.")
             else:
@@ -110,11 +110,26 @@ def get_twitter_trends():
 
 
 def get_wikipedia_article():
-    pass
+    url = 'https://en.wikipedia.org/api/rest_v1/page/random/summary/'
+
+    headers = {
+        'Authorization': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiJkZmZmNWYzMzliNDlmYzBmZWRjNzBkZWQxY2QwMWE4YiIsImp0aSI6ImQ0NTlmMGI0YzE0NTc4ZDA0MmRkNTFjMDlmNDY1YzQ2Zjk5MGYzNTg4NWYyODc1MmRlYTA0Y2EyOGEzOWRkNWQ0M2I2ZDc2NjQwZWMwMjYzIiwiaWF0IjoxNzExOTg1NzEyLjg5MTksIm5iZiI6MTcxMTk4NTcxMi44OTE5MDQsImV4cCI6MzMyNjg4OTQ1MTIuODkwMjc4LCJzdWIiOiI3NTMzMTIxNSIsImlzcyI6Imh0dHBzOi8vbWV0YS53aWtpbWVkaWEub3JnIiwicmF0ZWxpbWl0Ijp7InJlcXVlc3RzX3Blcl91bml0Ijo1MDAwLCJ1bml0IjoiSE9VUiJ9LCJzY29wZXMiOlsiYmFzaWMiXX0.CUhgcnnps-4_TC3AIwBJDdLN84LB9lQuoC2ivt2IuVwPJq9ldBWrIbkZeySFwK3ESW4zQE2PSUyWYBqiMi6ii76rAA_Grere8fGKXiqP6DtuR_oUbRpk8c0pY1GGSSJe59Qk9kcGlhtwl7E22vfUUefpnFuYq2nJjYBJ7G7lxGxXsRcxPlRAJiYRlLNYhEibnH1rVkr10lop_qbEz_x_e9vgnmhu-2aWpbIDJhlVSlta1BysBIeoniwRiMsvfF9EEpO-336Zq9Iy_-RmzDcjmPinnuwUaM9trXd8fVMI--ncdQKeX1gnHpb0QdtdbCDhS7Z-4E2avYfMRGi-aHt0eTqHjfH-412JsuBLHJSju-E3wqbCx4ZA1vn6dBNfqNzrPMzvUjxeqg-da1Tvl1EkNliJfjJ1323VMPv5coEVBrzZzSz4T36U--JFLb0m6I6bOdK3XXm3bJ7Z9DN8MPAT-OF8FQkMDMZy1tKPzxnr3O2W4r87j4jIXam3dbKLD2XKhUu_4hcSMaMNstSKk_rBaiKV1d1RcNJllik6n5yUl5l6LFL4Qkuko-zkfrpihJL2qT-S2iNw1D4869ap5cuyvqFhrbW7Ebu2lbfJb_nQ_U9hP4mt6VxIA8-wbTeUfQ18nsdetxWQRuL27JlHLqVmIIcZL2bT0Mg5H0UDm3rgmgI',
+
+        'User-Agent': 'Daily DIgest (sikelelamathole.sm@gmail.com)'
+    }
+
+    response = requests.get(url, headers=headers)
+    data = response.json()
+    title = data['title']
+    extract = data['extract']
+    timestamp = data['timestamp']
+    print(title, timestamp)
+    print(extract)
+    # print(data)
 
 if __name__ == '__main__':
     # test code
-    print('\nTesting quote generation..')
+    print('\nTesting Random Quote generation..')
 
     quote = get_random_quote()
     print(f' - Random quote is "{quote["quote"]}" - {quote["author"]}')
@@ -122,7 +137,10 @@ if __name__ == '__main__':
     quote = get_random_quote(quotes_file= None)
     print(f' - Default quote is "{quote["quote"]}" - {quote["author"]}')
 
-    print('\nTesting weather forecasting..')
-
+    print('\nTesting Weather Forecasting..')
     get_weather_forecast()
-    get_twitter_trends()
+
+    #get_twitter_trends()
+
+    print('\nTesting Wikipedia Article...')
+    get_wikipedia_article()
