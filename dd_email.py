@@ -1,7 +1,9 @@
+import dd_content
+import datetime
 class DailyDigestEmail():
 
     def __init__(self):
-        pass
+        self.content = {'weather'}
 
     def send_email(self):
         pass
